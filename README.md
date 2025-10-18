@@ -20,7 +20,7 @@ A Django-based web application that helps users manage their wardrobe and get pe
 
 1. **Navigate to the project directory:**
    ```bash
-   cd "c:\Users\Lenovo\Desktop\college notes\5th sem\Mini project\StyleSense_code\myproject"
+   cd "<path>"
    ```
 
 2. **Install required packages:**
