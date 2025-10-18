@@ -1,0 +1,243 @@
+:root {
+    /* THEME COLORS */
+    --midnight-blue: #191970;
+    --lavender-blue: #CCCCFF; 
+    
+    --white-text: #ffffff;
+    --page-padding: 30px; 
+    --header-height: 70px; 
+    --footer-height: 60px;
+    --app-max-width: 1200px;
+}
+
+/* Base Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--midnight-blue);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    color: #333;
+}
+
+#app-container {
+    width: 100%;
+    max-width: var(--app-max-width);
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    position: relative;
+    min-height: 100vh; 
+    overflow: hidden; 
+}
+
+/* Global Header */
+#global-header {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--header-height);
+    background-color: var(--lavender-blue); 
+    color: var(--midnight-blue);
+    z-index: 101; 
+    padding: 0 30px; 
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid var(--midnight-blue); 
+}
+
+.app-logo {
+    height: 50px; 
+    width: auto;
+    margin-right: 15px;
+    background: transparent; 
+}
+
+.logo-text {
+    font-weight: bold;
+    font-size: 24px;
+    color: var(--midnight-blue);
+}
+
+/* GLOBAL FOOTER */
+#global-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: var(--footer-height);
+    background-color: var(--lavender-blue);
+    color: var(--midnight-blue);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 14px;
+    z-index: 100;
+    border-top: 2px solid var(--midnight-blue);
+}
+#global-footer a {
+    color: var(--midnight-blue);
+    font-weight: bold;
+    text-decoration: none;
+}
+#global-footer p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Page Management */
+.page {
+    position: absolute; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-sizing: border-box;
+    display: none;
+    overflow-y: auto; 
+    z-index: 99; 
+    background-color: white; 
+    
+    /* Calculate height: 100% minus the footer height */
+    height: calc(100% - var(--footer-height)); 
+    padding-top: var(--header-height); 
+}
+
+.active-page {
+    display: block;
+}
+
+.page:not(#page-auth) {
+    padding: var(--page-padding);
+    padding-top: calc(var(--page-padding) + var(--header-height)); 
+}
+
+/* Auth Page Layout */
+#page-auth {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 30px; 
+    min-height: calc(100vh - var(--header-height) - var(--footer-height)); 
+}
+.auth-options {
+    text-align: center; 
+}
+
+/* Titles and Headings */
+h1, h2 {
+    color: var(--midnight-blue);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Form Styles */
+form {
+    max-width: 600px; 
+    margin: 20px auto; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Input Styles */
+input, select, textarea {
+    padding: 15px; 
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px; 
+    text-align: center; 
+    width: 100%; 
+    box-sizing: border-box;
+}
+
+/* Button & Theme Styles */
+.kaitoke-btn {
+    background-color: var(--lavender-blue);
+    color: var(--midnight-blue); 
+    border: 2px solid var(--midnight-blue);
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+}
+.kaitoke-btn:hover {
+    background-color: #B2B2FF;
+}
+
+/* Home Page Header (Contains the Menu Button) */
+.home-header {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+/* Home Content Spacing FIX */
+.home-content {
+    /* Adds separation between the Vibe buttons and the content below */
+    margin-bottom: 50px; 
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    position: absolute;
+    top: calc(var(--header-height) + var(--page-padding) + 5px); 
+    left: var(--page-padding);
+    width: 250px;
+    background-color: var(--lavender-blue);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    z-index: 103;
+    display: none;
+    flex-direction: column;
+}
+.dropdown-menu.open {
+    display: flex;
+}
+
+.menu-item {
+    color: var(--midnight-blue);
+    background: none;
+    border: none;
+    padding: 12px 15px;
+    text-align: left;
+    transition: background-color 0.2s;
+}
+.menu-item:hover {
+    background-color: #DDEEFF;
+}
+
+/* Vibe Options */
+.vibe-options-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
+    margin-top: 30px;
+    text-align: center;
+}
+
+/* Feedback Button Positioning */
+.feedback-btn {
+    position: absolute; 
+    bottom: calc(30px + var(--footer-height)); 
+    right: 30px;
+    padding: 12px 20px;
+}
+
+/* Outfit Gallery */
+.outfit-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 30px;
+    margin-top: 30px;
+    text-align: center;
+}

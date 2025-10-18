@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Style Sense</title>
+    <link rel="stylesheet" href="{% static 'stylesense/style.css' %}">
+</head>
+<body>
+
+    <div id="app-container">
+        
+        <header id="global-header">
+            <div class="logo-container">
+                
+                <span class="logo-text">AI Style Sense</span>
+            </div>
+        </header>
+
+        <section id="page-auth" class="page active-page">
+            <h1 class="auth-title">Welcome to AI Style Sense</h1>
+            <div class="auth-options">
+                <button id="show-signin" class="kaitoke-btn">Sign In</button>
+                <button id="show-signup" class="kaitoke-btn">Sign Up</button>
+            </div>
+        </section>
+
+        <section id="page-signin" class="page">
+            <h2>Sign In</h2>
+            <form id="signin-form">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <button type="submit" class="kaitoke-btn full-width-btn">Sign In & Go Home</button>
+            </form>
+            <button class="back-btn" onclick="showPage('page-auth')">Back</button>
+        </section>
+
+        <section id="page-signup-1" class="page">
+            <h2>User Details</h2>
+            <form id="signup-form-1">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="number" name="age" placeholder="Age" required>
+                <input type="email" name="email" placeholder="Gmail" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <div class="nav-right">
+                    <button type="submit" class="kaitoke-btn">Next</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="page-signup-2" class="page">
+            <h2>Personal Info</h2>
+            <form id="signup-form-2">
+                <select id="gender-select" name="gender" required>
+                    <option value="" disabled selected>Select Gender</option>
+                    <option value="female">Female</option>
+                    <option value="male">Male</option>
+                    <option value="other">Other</option>
+                </select>
+                <input type="text" name="location" placeholder="Location (City)" required>
+                <input type="text" name="country" placeholder="Country" required>
+                <div class="nav-right">
+                    <button type="submit" class="kaitoke-btn">Next</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="page-signup-3" class="page">
+            <h2>Dressing Preference</h2>
+            <form id="signup-form-3">
+                <label for="dress-pref">Select Preference:</label>
+                <select id="dress-pref" name="preference" required>
+                    <option value="" disabled selected>Choose a Style</option>
+                    <option value="indian">Indian</option>
+                    <option value="western">Western</option>
+                    <option value="indo-western">Indo-Western</option>
+                    <option value="all">All</option>
+                </select>
+                <div class="nav-right">
+                    <button type="submit" class="kaitoke-btn">Save & Go Home</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="page-home" class="page">
+            <header class="home-header">
+                <button id="menu-toggle" class="kaitoke-btn menu-btn">☰ Menu</button>
+            </header>
+
+            <nav id="dropdown-menu" class="dropdown-menu">
+                <button class="menu-item" onclick="showPage('page-profile'); closeMenu();">Profile</button>
+                <button class="menu-item" onclick="showPage('page-suggest-menu'); closeMenu();">Suggest Outfits</button>
+                <button class="menu-item" onclick="showPage('page-add-clothes'); closeMenu();">Add Clothes</button>
+                <button class="menu-item" onclick="showPage('page-delete-clothes'); closeMenu();">Delete Clothes</button>
+                <button class="menu-item" onclick="showPage('page-donate'); closeMenu();">Donate Clothes</button>
+            </nav>
+            
+            <div class="home-content">
+                <h2>WHAT IS THE VIBE FOR THE DAY?</h2>
+                <div class="vibe-options-grid">
+                    <button class="kaitoke-btn vibe-grid-item" onclick="showSuggestion('office')">Office/College</button>
+                    <button class="kaitoke-btn vibe-grid-item" onclick="showSuggestion('party')">Party</button>
+                    <button class="kaitoke-btn vibe-grid-item" onclick="showSuggestion('casual')">Casual Outing</button>
+                    <button class="kaitoke-btn vibe-grid-item" onclick="showPage('page-other-vibe')">Others</button>
+                </div>
+            </div>
+            
+            <button class="feedback-btn kaitoke-btn" onclick="showPage('page-feedback')">Feedback</button>
+        </section>
+        
+        <section id="page-suggest-menu" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>Suggested Outfits</h2>
+            </header>
+            <p>Browse outfits based on your current preferences and wardrobe.</p>
+            <div class="outfit-gallery">
+                <div class="outfit-card">
+                    <div class="outfit-image-placeholder"></div>
+                    <p>**Vibe:** Professional</p>
+                    <a href="#" target="_blank" class="kaitoke-btn shopping-link-small">Shop This Look</a>
+                </div>
+                 <div class="outfit-card">
+                    <div class="outfit-image-placeholder"></div>
+                    <p>**Vibe:** Casual</p>
+                    <a href="#" target="_blank" class="kaitoke-btn shopping-link-small">Shop This Look</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-outfit-recommendation" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2 id="recommendation-title">Outfit Recommendation</h2>
+            </header>
+            <p id="recommendation-text">Based on your selection, here is an outfit:</p>
+            <div class="outfit-gallery">
+                <div class="outfit-card">
+                    <div class="outfit-image-placeholder"></div>
+                    <p id="vibe-context"></p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="page-feedback" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>Give Feedback</h2>
+            </header>
+            <form id="feedback-form">
+                <textarea name="feedback" rows="6" placeholder="Your feedback helps us improve..." required></textarea>
+                <button type="submit" class="kaitoke-btn">Submit Feedback</button>
+            </form>
+            <p class="contact-us-text">
+                Or, Contact us directly at:
+                <a href="mailto:stylesenseai@gmail.com" class="kaitoke-btn contact-email-btn">stylesenseai@gmail.com</a>
+            </p>
+        </section>
+        
+        <section id="page-profile" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>User Profile</h2>
+            </header>
+            <div id="user-info">
+                <p><strong>Username:</strong> <span id="p-username"></span></p>
+                <p><strong>Age:</strong> <span id="p-age"></span></p>
+                <p><strong>Email:</strong> <span id="p-email"></span></p>
+                <p><strong>Gender:</strong> <span id="p-gender"></span></p>
+                <p><strong>Location:</strong> <span id="p-location"></span></p>
+                <p><strong>Preference:</strong> <span id="p-preference"></span></p>
+            </div>
+            <button class="kaitoke-btn full-width-btn" onclick="showPage('page-view-clothes')">View Clothes</button>
+            <button class="kaitoke-btn full-width-btn" onclick="handleSignout()">Sign Out</button>
+        </section>
+
+        <section id="page-view-clothes" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-profile')">← Profile</button>
+                <h2>Your Wardrobe</h2>
+            </header>
+            <div id="wardrobe-container">
+                <p>Loading your wardrobe...</p>
+            </div>
+        </section>
+
+        <section id="page-add-clothes" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>Add Clothes</h2>
+            </header>
+            <p>Please allow Camera/Gallery permissions.</p>
+            <div class="category-grid">
+                <button class="kaitoke-btn category-btn" onclick="showAddForm('Tops')">Tops</button>
+                <button class="kaitoke-btn category-btn" onclick="showAddForm('Pants')">Pants</button>
+                <button class="kaitoke-btn category-btn" onclick="showAddForm('Shoes')">Shoes</button>
+                <button class="kaitoke-btn category-btn" onclick="showAddForm('Scarfs')">Scarfs</button>
+            </div>
+        </section>
+
+        <section id="page-add-item" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-add-clothes')">← Back</button>
+                <h2 id="add-item-title">Add Item</h2>
+            </header>
+            <form id="add-clothing-form" enctype="multipart/form-data">
+                <p>Upload an image or take a picture of your <span id="add-item-category">item</span>.</p>
+                <input type="hidden" name="category" id="add-category-input">
+                <textarea name="description" placeholder="Description (optional)"></textarea>
+                <input type="file" name="image" accept="image/*" capture="camera">
+                <button type="submit" class="kaitoke-btn full-width-btn">Add to Wardrobe</button>
+            </form>
+        </section>
+
+        <section id="page-delete-clothes" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>Delete Clothes</h2>
+            </header>
+            <p>Select a category to view and delete items.</p>
+            <div class="category-grid">
+                <button class="kaitoke-btn category-btn" onclick="showDeleteList('Tops')">Tops</button>
+                <button class="kaitoke-btn category-btn" onclick="showDeleteList('Pants')">Pants</button>
+                <button class="kaitoke-btn category-btn" onclick="showDeleteList('Shoes')">Shoes</button>
+            </div>
+        </section>
+
+        <section id="page-delete-item" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-delete-clothes')">← Back</button>
+                <h2 id="delete-item-title">Delete Item</h2>
+            </header>
+            <p>Click on an item to remove it from your <span id="delete-item-category">category</span>.</p>
+            <div id="delete-item-list" class="item-list">
+                <div class="delete-item">
+                    <span>Blue T-Shirt</span>
+                    <button class="delete-btn">Delete</button>
+                </div>
+                <div class="delete-item">
+                    <span>White Polo</span>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-donate" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>Donate Clothes</h2>
+            </header>
+            <p>To donate your clothes, please call our toll-free number:</p>
+            <a href="tel:18005550199" class="kaitoke-btn toll-free-btn">📞 1-800-555-0199</a>
+            <p>Our representative will guide you through the donation process.</p>
+        </section>
+
+        <section id="page-other-vibe" class="page">
+            <header class="page-header">
+                <button class="back-btn" onclick="showPage('page-home')">← Home</button>
+                <h2>Custom Vibe</h2>
+            </header>
+            <form id="custom-vibe-form">
+                <textarea name="vibe" rows="4" placeholder="e.g., Dinner date at a fancy restaurant, casual picnic in the park, etc." required></textarea>
+                <button type="submit" class="kaitoke-btn full-width-btn">Get Suggestion</button>
+            </form>
+        </section>
+        
+        <footer id="global-footer">
+            <p>
+                Created by Team StyleSense AI | Mini Project
+                <br>
+                Contact us at: <a href="mailto:stylesenseai@gmail.com">stylesenseai@gmail.com</a>
+            </p>
+        </footer>
+        
+    </div>
+    
+    <script src="{% static 'stylesense/script.js' %}"></script>
+</body>
+</html>
